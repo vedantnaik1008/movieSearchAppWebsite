@@ -53,23 +53,47 @@ main {
     gap: 1rem 2rem;
     margin: 0 1rem;
 }
-
 /* ye baad me dekhte hai */
+
+section{
+    display: flex;
+    justify-content: center;
+    gap: 0 3rem;
+}
+
+section button{
+    padding: 20px;
+    font-size: 20px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 10px;
+}
 
 .movie {
     box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
-  
     min-width: 100%;
     margin: 1.5rem 0;
     overflow: hidden;
     position: relative;
     background-color: black;
+    transition: border .3s ease-in-out;
 }
 
 .movie img {
     width: 100%;
 }
+
+.movie#chartreuse:hover{
+    border: 8px solid chartreuse;
+} 
+.movie#darkorange:hover{
+    border: 8px solid darkorange;
+} 
+.movie#crimson:hover{
+    border: 8px solid crimson;
+} 
 
 .movie-info {
     display: flex;
@@ -91,9 +115,10 @@ main {
     font-weight: bold;
 }
 
-.movie-info span.green {
+.movie-info span.green{
     color: rgb(46, 194, 46);
 }
+
 .movie-info span.orange {
     color: orange;
 }
