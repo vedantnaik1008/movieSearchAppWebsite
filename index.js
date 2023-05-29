@@ -1,35 +1,14 @@
-const APIURL = `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=04c35731a5ee918f014970082a0088b1&page=1`
-
+const API_KEY = "04c35731a5ee918f014970082a0088b1";
+let currentPage = 1;
 const IMGPATH = "https://image.tmdb.org/t/p/w1280";
-
+const APIURL =`https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=${API_KEY}&page=${currentPage}`
 const SEARCHAPI = "https://api.themoviedb.org/3/search/movie?&api_key=04c35731a5ee918f014970082a0088b1&query=";
 
 const mainEl = document.getElementById("main");
 const formEl = document.getElementById("form");
 const searchEl = document.getElementById("search");
-// const prev = document.querySelector(".prev");
-// const next = document.querySelector(".next");
-
-// var curPage = 1;
-// var pages = ["page=1","page=2"];
-
-// prev.addEventListener("click", ()=>{
-//     curPage--
-//     updatePages()
-// })
-// next.addEventListener("click", ()=>{
-//     curPage++
-//     updatePages()
-// })
-
-// function updatePages() {
-//     if(curPage > pages.length){
-//         curPage = 1;
-//     }else if(curPage < 1){
-//         curPage = pages.length
-//     }
-//     console.log(pages)
-// }
+const nextBtn = document.querySelector(".next");
+const prevBtn = document.querySelector(".prev");
 
 getMovies(APIURL);
 
@@ -49,7 +28,7 @@ function updateMovies(movies){
     mainEl.innerHTML = "";
 
     movies.forEach((movie) => {
-        const {overview, poster_path, title, vote_average} = movie;
+        const {overview, poster_path, title, vote_average, backdrop_path, popularity, release_date} = movie;
 
         const movieEl = document.createElement("div");
         movieEl.classList.add("movie");
@@ -64,7 +43,12 @@ function updateMovies(movies){
         </div>
         <div class="overview">
                 <h4>Overview</h4>
+                <img src="${IMGPATH + backdrop_path}" />
                 <p>${overview}</p>
+            <div class="movie-details">
+            <span>Popularity: ${popularity}</span>
+            <span>Release Date: ${release_date}</span>
+            </div>
         </div>`
         mainEl.appendChild(movieEl);
     });
@@ -99,9 +83,16 @@ formEl.addEventListener("submit", (e)=>{
         searchEl.value = "";
     }
 })
-
-
-
-
-
-    
+nextBtn.addEventListener("click", () => {
+    currentPage++;
+    const updatedUrl = `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=${API_KEY}&page=${currentPage}`;
+    getMovies(updatedUrl);
+  });
+  
+  prevBtn.addEventListener("click", () => {
+    if (currentPage > 1) {
+      currentPage--;
+      const updatedUrl = `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=${API_KEY}&page=${currentPage}`;
+      getMovies(updatedUrl);
+    }
+  });

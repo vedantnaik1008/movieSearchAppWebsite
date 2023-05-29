@@ -22,11 +22,11 @@ header {
     background-color: var(--bc);
     padding: 1rem;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
 }
 
 .search {
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 2rem;
     border-radius: 50px;
     border: 2px solid var(--wc);
     background-color: transparent;
@@ -45,15 +45,11 @@ header {
 }
 
 main {
-    /* display: flex;
-    flex-wrap: wrap; 
-    justify-content: center; */
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 1rem 2rem;
     margin: 0 1rem;
 }
-/* ye baad me dekhte hai */
 
 section{
     display: flex;
@@ -137,11 +133,34 @@ section button{
     transform: translateY(100%);
     transition: transform 1s ease-in;
     max-width: 100%;
-    overflow: auto;
+    overflow-y: scroll;
 }
 
 .overview p {
     color: var(--wc);
+    line-height: 1.6;
+}
+
+.overview img{
+    border-radius: 10px;
+    object-fit: cover;
+    width: 100%;
+    height: 30%;
+    transition: transform .3s ease-out;
+}
+
+.overview img:hover{
+    transform: scale(1.20);
+}
+
+.overview .movie-details{
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+}
+
+.overview .movie-details span{
+    color: #FFFFFF;
 }
 
 .movie:hover .overview {
@@ -153,8 +172,29 @@ section button{
     color: var(--wc);
 }
 
-@media (max-width: 695px) {
-    header {
-        justify-content: center;
+.overview::-webkit-scrollbar {
+    width: 8px; 
+  }
+
+  .overview::-webkit-scrollbar-thumb {
+    background: #FFFFFF; 
+    border-radius: 5px; 
+  }
+
+  .overview::-webkit-scrollbar-track:hover {
+    background: black; 
+  }
+  
+  @media (max-width: 624px) {
+    .overview img:hover{
+        transform: scale(1);
     }
-}
+  }
+
+  @media (max-width: 361px) {
+    .overview .movie-details{
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+    }
+  }
