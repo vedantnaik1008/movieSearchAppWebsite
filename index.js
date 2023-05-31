@@ -9,6 +9,7 @@ const formEl = document.getElementById("form");
 const searchEl = document.getElementById("search");
 const nextBtn = document.querySelector(".next");
 const prevBtn = document.querySelector(".prev");
+const body = document.querySelector("body");
 
 getMovies(APIURL);
 
@@ -19,7 +20,7 @@ async function getMovies(url){
         console.log(data);
         updateMovies(data.results);
     } catch (error) {
-       console.log(error + alert("An error happened, Please try again")); 
+       console.log(error ); 
     }
     
 }
@@ -36,7 +37,7 @@ function updateMovies(movies){
         movieEl.setAttribute("id", `${getBorderAverage(vote_average)}`)
 
         movieEl.innerHTML = `
-        <img src="${ IMGPATH + poster_path}" alt="${title}">
+        <img src="${IMGPATH + poster_path}" alt="${title}">
         <div class="movie-info">
             <h3>${title}</h3>
             <span class="${getVoteAverage(vote_average)}">${vote_average}</span>
@@ -45,14 +46,17 @@ function updateMovies(movies){
                 <h4>Overview</h4>
                 <img src="${IMGPATH + backdrop_path}" />
                 <p>${overview}</p>
-            <div class="movie-details">
-            <span>Popularity: ${popularity}</span>
-            <span>Release Date: ${release_date}</span>
-            </div>
+                <div class="movie-details">
+                <span>Popularity: ${popularity}</span>
+                <span>Release Date: ${release_date}</span>
+                </div>
         </div>`
         mainEl.appendChild(movieEl);
     });
 }
+
+
+  
 
 function getVoteAverage(vote) {
     if(vote >= 8){
@@ -96,3 +100,4 @@ nextBtn.addEventListener("click", () => {
       getMovies(updatedUrl);
     }
   });
+  
